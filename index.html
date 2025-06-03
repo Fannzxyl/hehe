@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Will you be my girlfriend?</title>
+    <style>
+        body {
+            font-family: 'Comic Sans MS', cursive, sans-serif; /* Tambahkan fallback font */
+            text-align: center;
+            margin-top: 50px;
+            background-color: #fff0f5; /* Pastel pink */
+            overflow-x: hidden; /* Mencegah scroll horizontal yang tidak diinginkan */
+            display: flex; /* Untuk memposisikan konten di tengah secara vertikal dan horizontal */
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: calc(100vh - 100px); /* Sesuaikan tinggi agar tidak menempel bawah */
+        }
+        h1 {
+            font-size: 2.5rem;
+            color: #ff69b4; /* Hot pink */
+        }
+        .gif-container {
+            margin: 20px 0;
+            min-height: 150px; /* Agar tidak ada lompatan layout saat GIF dimuat */
+        }
+        .gif-container img {
+            width: 150px;
+            height: auto;
+            border-radius: 20px;
+        }
+        .btn {
+            padding: 1em 2em;
+            margin: 20px;
+            font-size: 1.2rem;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            white-space: nowrap; /* Mencegah teks tombol pecah baris */
+        }
+        .yes-wrapper {
+            display: inline-block;
+            animation: throb 1.2s infinite; /* Animasi berdenyut untuk tombol "Yes" */
+            transform-origin: center;
+        }
+        #yesBtn {
+            background-color: #ff1493; /* Deep pink */
+            color: white;
+        }
+        #noBtn {
+            background-color: #d3d3d3; /* Light gray */
+            color: #333;
+        }
+        #finalScreen {
+            display: none; /* Default hidden */
+            margin-top: 30px;
+            padding: 20px;
+            background-color: #ffe4e1; /* Misty rose */
+            border-radius: 15px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        #finalScreen h2 {
+            color: #ff69b4;
+            font-size: 2rem;
+            margin-bottom: 20px;
+        }
+        #capturedImage {
+            max-width: 100%; /* Agar responsif */
+            height: auto;
+            border-radius: 20px;
+            border: 5px solid #ffb6c1; /* Garis tepi untuk gambar */
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .button-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+            flex-wrap: wrap; /* Agar tombol tidak tumpang tindih di layar kecil */
+        }
+        .confetti {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            pointer-events: none; /* Agar tidak mengganggu interaksi mouse */
+            z-index: 9999;
+        }
+        @keyframes throb {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+    </style>
+</head>
+<body>
+    <h1>Will you be my girlfriend?</h1>
+    <div class="gif-container">
+        <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExdjRpY21iYmJmd3o0ejR6d21lbHN0Nmx6ZTJ1bjFmY3h6cGpnbzN0NCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/ts0Uy1zVJTvCo/giphy.gif" alt="Sad Hello Kitty" />
+    </div>
+    <div class="button-container">
+        <div class="yes-wrapper">
+            <button class="btn" id="yesBtn">ABSOLUTELY YES</button>
+        </div>
+        <button class="btn" id="noBtn">noo :(</button>
+    </div>
+
+    <div id="finalScreen">
+        <h2>Happily ever after 💕</h2>
+        <img id="capturedImage" src="" alt="His lovely face" />
+    </div>
+
+    <canvas id="confettiCanvas" class="confetti"></canvas>
+
+    <script>
+        const yesBtn = document.getElementById('yesBtn');
+        const noBtn = document.getElementById('noBtn');
+        const finalScreen = document.getElementById('finalScreen');
+        const capturedImage = document.getElementById('capturedImage');
+        // const buttonContainer = document.querySelector('.button-container'); // Tidak digunakan di JS, bisa dihapus
+        const gifImage = document.querySelector('.gif-container img'); // Referensi GIF
+        const h1Title = document.querySelector('h1'); // Referensi H1
+
+        const confettiCanvas = document.getElementById('confettiCanvas');
+        const confettiCtx = confettiCanvas.getContext('2d');
+        confettiCanvas.width = window.innerWidth;
+        confettiCanvas.height = window.innerHeight;
+
+        let yesSize = 1; // Ukuran awal tombol YES
+        const noTexts = [
+            "yaaah 😢", 
+            "yakin nih?", 
+            "gamau berubah pikiran ya? :(", 
+            "coba pikirin lagi deh..",
+            "ayooo dongg", 
+            "sayang banget kalo ngelewatin aku", 
+            "kasih aku kesempatan dong 🥺", 
+            "please dipikirin lagi yaa",
+            "aku tungguin kok..", 
+            "aku bawa bunga dandelion nih 💐", 
+            "kesempatan terakhir niii..", 
+            "okelah... Ga! kamu harus terima!!"
+        ];
+
+        // Event listener untuk tombol 'noBtn'
+        noBtn.addEventListener('click', () => {
+            yesSize += 0.3; // Tambah ukuran tombol YES
+            yesBtn.style.transform = `scale(${yesSize})`; // Perbaikan sintaks ini
+
+            const newText = noTexts[Math.floor(Math.random() * noTexts.length)];
+            noBtn.innerText = newText; // Ganti teks tombol NO
+
+            // Jika tombol YES terlalu besar, sembunyikan tombol NO
+            if (yesSize > 3.5) {
+                noBtn.style.display = 'none';
+                // Opsional: ubah teks di tombol YES jika NO sudah tidak ada
+                yesBtn.innerText = "YAY! TEKAN INI SEKARANG!";
+            }
+        });
+
+        // Event listener untuk tombol 'yesBtn'
+        yesBtn.addEventListener('click', () => {
+            // Sembunyikan elemen-elemen awal
+            h1Title.style.display = 'none';
+            gifImage.style.display = 'none';
+            document.querySelector('.button-container').style.display = 'none'; // Sembunyikan container tombol
+
+            // Tampilkan layar final
+            finalScreen.style.display = 'block';
+            
+            // Aktifkan confetti
+            launchGlitter();
+
+            // Akses kamera
+            navigator.mediaDevices.getUserMedia({ video: true })
+                .then(stream => {
+                    const video = document.createElement('video');
+                    video.srcObject = stream;
+                    video.play();
+
+                    // Tangkap gambar setelah beberapa saat
+                    setTimeout(() => {
+                        const canvas = document.createElement('canvas');
+                        canvas.width = video.videoWidth;
+                        canvas.height = video.videoHeight;
+                        const context = canvas.getContext('2d');
+                        context.drawImage(video, 0, 0, canvas.width, canvas.height); // Pastikan gambar diambil sesuai dimensi
+                        const imageUrl = canvas.toDataURL('image/png');
+                        capturedImage.src = imageUrl;
+                        stream.getTracks().forEach(track => track.stop()); // Hentikan stream kamera
+                        video.remove(); // Hapus elemen video setelah dipakai
+                    }, 1500); // 1.5 detik untuk inisialisasi kamera
+
+                })
+                .catch(err => {
+                    // Jika akses kamera ditolak
+                    alert('KASIH AKSES KAMERANYA DONG GANTEEENG 😢'); // Pesan alert
+                    console.error("Error accessing camera:", err); // Log error untuk debugging
+                    capturedImage.alt = "Kamera tidak dapat diakses."; // Ubah alt text jika gambar tidak bisa ditangkap
+                    capturedImage.style.display = 'none'; // Sembunyikan img jika tidak bisa diakses
+                });
+        });
+
+        // Fungsi untuk animasi confetti
+        function launchGlitter() {
+            const confettiPieces = [];
+            const colors = ['#ff69b4', '#fff0f5', '#ffb6c1', '#ffe4e1', '#ffc0cb'];
+            const numConfetti = 150; // Jumlah confetti
+
+            for (let i = 0; i < numConfetti; i++) {
+                confettiPieces.push({
+                    x: Math.random() * confettiCanvas.width,
+                    y: Math.random() * confettiCanvas.height - confettiCanvas.height, // Mulai dari atas layar
+                    radius: Math.random() * 6 + 2,
+                    color: colors[Math.floor(Math.random() * colors.length)],
+                    speed: Math.random() * 3 + 2,
+                    sway: (Math.random() - 0.5) * 4 // Untuk gerakan ke kiri dan kanan
+                });
+            }
+
+            function drawConfetti() {
+                confettiCtx.clearRect(0, 0, confettiCanvas.width, confettiCanvas.height); // Bersihkan canvas setiap frame
+
+                confettiPieces.forEach(p => {
+                    confettiCtx.beginPath();
+                    confettiCtx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+                    confettiCtx.fillStyle = p.color;
+                    confettiCtx.fill();
+
+                    p.y += p.speed;
+                    p.x += p.sway; // Tambahkan gerakan ke samping
+
+                    // Reset confetti jika sudah melewati layar bawah
+                    if (p.y > confettiCanvas.height + p.radius) {
+                        p.y = -p.radius; // Kembali ke atas
+                        p.x = Math.random() * confettiCanvas.width; // Posisi x acak
+                        p.sway = (Math.random() - 0.5) * 4; // Atur ulang sway
+                    }
+                });
+                requestAnimationFrame(drawConfetti);
+            }
+            drawConfetti(); // Mulai animasi
+        }
+
+        // Sesuaikan ukuran canvas confetti saat jendela diubah ukurannya
+        window.addEventListener('resize', () => {
+            confettiCanvas.width = window.innerWidth;
+            confettiCanvas.height = window.innerHeight;
+        });
+
+    </script>
+</body>
+</html>
