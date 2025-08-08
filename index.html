@@ -3,114 +3,282 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Will you be my girlfriend?</title>
+    <title>Will you be my girlfriend? 💕</title>
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;600;700&family=Poppins:wght@300;400;500;600&display=swap');
+        
         body {
-            font-family: 'Comic Sans MS', cursive, sans-serif; /* Tambahkan fallback font */
+            font-family: 'Poppins', sans-serif;
             text-align: center;
-            margin-top: 50px;
-            background-color: #fff0f5; /* Pastel pink */
-            overflow-x: hidden; /* Mencegah scroll horizontal yang tidak diinginkan */
-            display: flex; /* Untuk memposisikan konten di tengah secara vertikal dan horizontal */
+            margin: 0;
+            padding: 20px;
+            background: linear-gradient(135deg, #ffeef8 0%, #f8e8ff 50%, #ffe0f0 100%);
+            overflow-x: hidden;
+            display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            min-height: calc(100vh - 100px); /* Sesuaikan tinggi agar tidak menempel bawah */
+            min-height: calc(100vh - 40px);
+            position: relative;
         }
+        
+        body::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: 
+                radial-gradient(circle at 20% 80%, rgba(255, 182, 193, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(255, 105, 180, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 40% 40%, rgba(255, 192, 203, 0.1) 0%, transparent 50%);
+            pointer-events: none;
+            z-index: -1;
+        }
+        
+        .floating-hearts {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            pointer-events: none;
+            z-index: -1;
+        }
+        
+        .heart {
+            position: absolute;
+            color: rgba(255, 182, 193, 0.3);
+            font-size: 20px;
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(100vh) rotate(0deg); opacity: 0; }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% { transform: translateY(-100px) rotate(180deg); opacity: 0; }
+        }
+        
         h1 {
-            font-size: 2.5rem;
-            color: #ff69b4; /* Hot pink */
+            font-family: 'Dancing Script', cursive;
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            background: linear-gradient(45deg, #ff1493, #ff69b4, #ffc0cb);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 30px;
+            text-shadow: 0 2px 4px rgba(255, 105, 180, 0.3);
+            animation: sparkle 2s ease-in-out infinite alternate;
         }
+        
+        @keyframes sparkle {
+            0% { filter: brightness(1) drop-shadow(0 0 5px rgba(255, 105, 180, 0.3)); }
+            100% { filter: brightness(1.2) drop-shadow(0 0 15px rgba(255, 105, 180, 0.5)); }
+        }
+        
         .gif-container {
             margin: 20px 0;
-            min-height: 150px; /* Agar tidak ada lompatan layout saat GIF dimuat */
+            min-height: 200px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
+        
         .gif-container img {
-            width: 150px;
+            width: clamp(150px, 30vw, 250px);
             height: auto;
-            border-radius: 20px;
+            border-radius: 25px;
+            box-shadow: 0 8px 25px rgba(255, 105, 180, 0.3);
+            border: 3px solid rgba(255, 255, 255, 0.5);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
+        
+        .gif-container img:hover {
+            transform: scale(1.05);
+            box-shadow: 0 12px 35px rgba(255, 105, 180, 0.4);
+        }
+        
         .btn {
-            padding: 1em 2em;
-            margin: 20px;
-            font-size: 1.2rem;
+            padding: 15px 30px;
+            margin: 15px;
+            font-size: 1.1rem;
+            font-weight: 600;
             border: none;
-            border-radius: 10px;
+            border-radius: 50px;
             cursor: pointer;
-            transition: all 0.3s ease;
-            white-space: nowrap; /* Mencegah teks tombol pecah baris */
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            white-space: nowrap;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            font-family: 'Poppins', sans-serif;
+            position: relative;
+            overflow: hidden;
         }
+        
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.5s;
+        }
+        
+        .btn:hover::before {
+            left: 100%;
+        }
+        
         .yes-wrapper {
             display: inline-block;
-            animation: throb 1.2s infinite; /* Animasi berdenyut untuk tombol "Yes" */
+            animation: heartbeat 1.5s ease-in-out infinite;
             transform-origin: center;
         }
+        
+        @keyframes heartbeat {
+            0% { transform: scale(1); }
+            14% { transform: scale(1.1); }
+            28% { transform: scale(1); }
+            42% { transform: scale(1.1); }
+            70% { transform: scale(1); }
+        }
+        
         #yesBtn {
-            background-color: #ff1493; /* Deep pink */
+            background: linear-gradient(45deg, #ff1493, #ff69b4);
             color: white;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 700;
         }
+        
+        #yesBtn:hover {
+            background: linear-gradient(45deg, #e6127a, #ff4da6);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(255, 20, 147, 0.4);
+        }
+        
         #noBtn {
-            background-color: #d3d3d3; /* Light gray */
-            color: #333;
+            background: linear-gradient(45deg, #f0f0f0, #e0e0e0);
+            color: #666;
+            transition: all 0.3s ease;
         }
+        
+        #noBtn:hover {
+            background: linear-gradient(45deg, #e0e0e0, #d0d0d0);
+            transform: translateY(-2px);
+        }
+        
         #finalScreen {
-            display: none; /* Default hidden */
+            display: none;
             margin-top: 30px;
-            padding: 20px;
-            background-color: #ffe4e1; /* Misty rose */
-            border-radius: 15px;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            padding: 40px;
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(10px);
+            border-radius: 30px;
+            box-shadow: 0 15px 35px rgba(255, 105, 180, 0.2);
+            border: 2px solid rgba(255, 182, 193, 0.3);
+            max-width: 90vw;
         }
+        
         #finalScreen h2 {
-            color: #ff69b4;
-            font-size: 2rem;
-            margin-bottom: 20px;
+            font-family: 'Dancing Script', cursive;
+            background: linear-gradient(45deg, #ff1493, #ff69b4);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-size: clamp(1.8rem, 4vw, 2.5rem);
+            margin-bottom: 25px;
+            animation: bounce 2s ease-in-out infinite;
         }
+        
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+            40% { transform: translateY(-10px); }
+            60% { transform: translateY(-5px); }
+        }
+        
         #capturedImage {
-            max-width: 100%; /* Agar responsif */
+            max-width: 100%;
+            max-height: 400px;
             height: auto;
-            border-radius: 20px;
-            border: 5px solid #ffb6c1; /* Garis tepi untuk gambar */
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            border-radius: 25px;
+            border: 4px solid #ffb6c1;
+            box-shadow: 0 10px 30px rgba(255, 105, 180, 0.3);
+            transition: transform 0.3s ease;
         }
+        
+        #capturedImage:hover {
+            transform: scale(1.02);
+        }
+        
         .button-container {
             display: flex;
             justify-content: center;
             align-items: center;
             gap: 20px;
-            flex-wrap: wrap; /* Agar tombol tidak tumpang tindih di layar kecil */
+            flex-wrap: wrap;
+            margin-top: 20px;
         }
+        
         .confetti {
             position: fixed;
             top: 0;
             left: 0;
             width: 100vw;
             height: 100vh;
-            pointer-events: none; /* Agar tidak mengganggu interaksi mouse */
+            pointer-events: none;
             z-index: 9999;
         }
-        @keyframes throb {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.1); }
-            100% { transform: scale(1); }
+        
+        .romantic-message {
+            font-family: 'Dancing Script', cursive;
+            font-size: 1.2rem;
+            color: #ff69b4;
+            margin-top: 15px;
+            font-weight: 600;
+            opacity: 0.9;
+        }
+        
+        @media (max-width: 768px) {
+            body { padding: 15px; }
+            .btn { padding: 12px 24px; font-size: 1rem; margin: 10px; }
+            #finalScreen { padding: 25px; margin-top: 20px; }
         }
     </style>
 </head>
 <body>
-    <h1>Will you be my girlfriend?</h1>
-    <div class="gif-container">
-        <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExdjRpY21iYmJmd3o0ejR6d21lbHN0Nmx6ZTJ1bjFmY3h6cGpnbzN0NCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/ts0Uy1zVJTvCo/giphy.gif" alt="Sad Hello Kitty" />
+    <div class="floating-hearts">
+        <div class="heart" style="left: 10%; animation-delay: 0s;">💕</div>
+        <div class="heart" style="left: 20%; animation-delay: 1s;">💖</div>
+        <div class="heart" style="left: 30%; animation-delay: 2s;">💗</div>
+        <div class="heart" style="left: 40%; animation-delay: 3s;">💝</div>
+        <div class="heart" style="left: 50%; animation-delay: 4s;">💕</div>
+        <div class="heart" style="left: 60%; animation-delay: 5s;">💖</div>
+        <div class="heart" style="left: 70%; animation-delay: 0.5s;">💗</div>
+        <div class="heart" style="left: 80%; animation-delay: 1.5s;">💝</div>
+        <div class="heart" style="left: 90%; animation-delay: 2.5s;">💕</div>
     </div>
+
+    <h1>Will you be my girlfriend? 💕</h1>
+    <div class="romantic-message">You make my heart skip a beat... 💗</div>
+    
+    <div class="gif-container">
+        <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExMWp4aG1wOGJ6eDZvbmZkZGV6cTJ3OWJhbDdkbXp0aHFhcXJ6aW5ubyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/MDJ9IbxxvDUQM/giphy.gif" alt="Cute romantic animation" />
+    </div>
+    
     <div class="button-container">
         <div class="yes-wrapper">
-            <button class="btn" id="yesBtn">ABSOLUTELY YES</button>
+            <button class="btn" id="yesBtn">Yes, absolutely! 💕</button>
         </div>
-        <button class="btn" id="noBtn">noo :(</button>
+        <button class="btn" id="noBtn">Maybe later... 🥺</button>
     </div>
 
     <div id="finalScreen">
-        <h2>Happily ever after 💕</h2>
-        <img id="capturedImage" src="" alt="His lovely face" />
+        <h2>You made me the happiest person! 💕✨</h2>
+        <div class="romantic-message">Look how beautiful you are! 😍</div>
+        <img id="capturedImage" src="" alt="Your lovely smile" />
+        <div class="romantic-message">Forever and always... 💖</div>
     </div>
 
     <canvas id="confettiCanvas" class="confetti"></canvas>
@@ -120,132 +288,185 @@
         const noBtn = document.getElementById('noBtn');
         const finalScreen = document.getElementById('finalScreen');
         const capturedImage = document.getElementById('capturedImage');
-        // const buttonContainer = document.querySelector('.button-container'); // Tidak digunakan di JS, bisa dihapus
-        const gifImage = document.querySelector('.gif-container img'); // Referensi GIF
-        const h1Title = document.querySelector('h1'); // Referensi H1
+        const gifImage = document.querySelector('.gif-container img');
+        const h1Title = document.querySelector('h1');
+        const romanticMessage = document.querySelector('.romantic-message');
 
         const confettiCanvas = document.getElementById('confettiCanvas');
         const confettiCtx = confettiCanvas.getContext('2d');
         confettiCanvas.width = window.innerWidth;
         confettiCanvas.height = window.innerHeight;
 
-        let yesSize = 1; // Ukuran awal tombol YES
+        let yesSize = 1;
         const noTexts = [
-            "yaaah 😢", 
-            "yakin nih?", 
-            "gamau berubah pikiran ya? :(", 
-            "coba pikirin lagi deh..",
-            "ayooo dongg", 
-            "sayang banget kalo ngelewatin aku", 
-            "kasih aku kesempatan dong 🥺", 
-            "please dipikirin lagi yaa",
-            "aku tungguin kok..", 
-            "aku bawa bunga dandelion nih 💐", 
-            "kesempatan terakhir niii..", 
-            "okelah... Ga! kamu harus terima!!"
+            "Are you sure? 🥺", 
+            "Think about it? 💕", 
+            "Pretty please? 🌸", 
+            "Just give me a chance? 💖",
+            "I'll bring you flowers! 🌹", 
+            "We'd be perfect together 💫", 
+            "I promise to make you smile 😊", 
+            "You're worth the wait 💗",
+            "One chance is all I need 🙏", 
+            "I'll write you love letters 💌", 
+            "Last chance... please? 🥹", 
+            "Okay fine... YES IT IS! 💕"
         ];
 
-        // Event listener untuk tombol 'noBtn'
+        // Floating hearts animation
+        function createFloatingHeart() {
+            const heart = document.createElement('div');
+            heart.innerHTML = ['💕', '💖', '💗', '💝'][Math.floor(Math.random() * 4)];
+            heart.className = 'heart';
+            heart.style.left = Math.random() * 100 + '%';
+            heart.style.animationDelay = Math.random() * 6 + 's';
+            heart.style.animationDuration = (Math.random() * 3 + 6) + 's';
+            document.querySelector('.floating-hearts').appendChild(heart);
+
+            setTimeout(() => {
+                heart.remove();
+            }, 9000);
+        }
+
+        // Create floating hearts periodically
+        setInterval(createFloatingHeart, 2000);
+
         noBtn.addEventListener('click', () => {
-            yesSize += 0.3; // Tambah ukuran tombol YES
-            yesBtn.style.transform = `scale(${yesSize})`; // Perbaikan sintaks ini
+            yesSize += 0.25;
+            yesBtn.style.transform = `scale(${yesSize})`;
 
             const newText = noTexts[Math.floor(Math.random() * noTexts.length)];
-            noBtn.innerText = newText; // Ganti teks tombol NO
+            noBtn.innerText = newText;
 
-            // Jika tombol YES terlalu besar, sembunyikan tombol NO
-            if (yesSize > 3.5) {
+            // Add a little heart explosion effect
+            createMiniHearts(noBtn);
+
+            if (yesSize > 3) {
                 noBtn.style.display = 'none';
-                // Opsional: ubah teks di tombol YES jika NO sudah tidak ada
-                yesBtn.innerText = "YAY! TEKAN INI SEKARANG!";
+                yesBtn.innerText = "YES! Tap here now! 💕✨";
+                
+                // Change the romantic message
+                romanticMessage.innerHTML = "I knew you'd come around... 💖";
+                romanticMessage.style.animation = 'sparkle 1s ease-in-out infinite alternate';
             }
         });
 
-        // Event listener untuk tombol 'yesBtn'
         yesBtn.addEventListener('click', () => {
-            // Sembunyikan elemen-elemen awal
+            // Hide initial elements
             h1Title.style.display = 'none';
+            romanticMessage.style.display = 'none';
             gifImage.style.display = 'none';
-            document.querySelector('.button-container').style.display = 'none'; // Sembunyikan container tombol
+            document.querySelector('.button-container').style.display = 'none';
 
-            // Tampilkan layar final
+            // Show final screen
             finalScreen.style.display = 'block';
             
-            // Aktifkan confetti
-            launchGlitter();
+            // Launch romantic confetti
+            launchRomanticConfetti();
 
-            // Akses kamera
+            // Access camera
             navigator.mediaDevices.getUserMedia({ video: true })
                 .then(stream => {
                     const video = document.createElement('video');
                     video.srcObject = stream;
                     video.play();
 
-                    // Tangkap gambar setelah beberapa saat
                     setTimeout(() => {
                         const canvas = document.createElement('canvas');
                         canvas.width = video.videoWidth;
                         canvas.height = video.videoHeight;
                         const context = canvas.getContext('2d');
-                        context.drawImage(video, 0, 0, canvas.width, canvas.height); // Pastikan gambar diambil sesuai dimensi
+                        context.drawImage(video, 0, 0, canvas.width, canvas.height);
                         const imageUrl = canvas.toDataURL('image/png');
                         capturedImage.src = imageUrl;
-                        stream.getTracks().forEach(track => track.stop()); // Hentikan stream kamera
-                        video.remove(); // Hapus elemen video setelah dipakai
-                    }, 1500); // 1.5 detik untuk inisialisasi kamera
+                        stream.getTracks().forEach(track => track.stop());
+                        video.remove();
+                    }, 1500);
 
                 })
                 .catch(err => {
-                    // Jika akses kamera ditolak
-                    alert('KASIH AKSES KAMERANYA DONG GANTEEENG 😢'); // Pesan alert
-                    console.error("Error accessing camera:", err); // Log error untuk debugging
-                    capturedImage.alt = "Kamera tidak dapat diakses."; // Ubah alt text jika gambar tidak bisa ditangkap
-                    capturedImage.style.display = 'none'; // Sembunyikan img jika tidak bisa diakses
+                    alert('Please allow camera access so I can see your beautiful smile! 😍💕');
+                    console.error("Error accessing camera:", err);
+                    capturedImage.alt = "Camera access needed to capture your beauty";
+                    capturedImage.style.display = 'none';
                 });
         });
 
-        // Fungsi untuk animasi confetti
-        function launchGlitter() {
+        function createMiniHearts(button) {
+            for (let i = 0; i < 5; i++) {
+                const miniHeart = document.createElement('div');
+                miniHeart.innerHTML = '💕';
+                miniHeart.style.position = 'absolute';
+                miniHeart.style.left = button.offsetLeft + Math.random() * 50 + 'px';
+                miniHeart.style.top = button.offsetTop + Math.random() * 50 + 'px';
+                miniHeart.style.fontSize = '16px';
+                miniHeart.style.pointerEvents = 'none';
+                miniHeart.style.animation = 'float 2s ease-out forwards';
+                document.body.appendChild(miniHeart);
+
+                setTimeout(() => miniHeart.remove(), 2000);
+            }
+        }
+
+        function launchRomanticConfetti() {
             const confettiPieces = [];
-            const colors = ['#ff69b4', '#fff0f5', '#ffb6c1', '#ffe4e1', '#ffc0cb'];
-            const numConfetti = 150; // Jumlah confetti
+            const symbols = ['💕', '💖', '💗', '💝', '🌸', '🌹', '✨', '💫', '🦋'];
+            const colors = ['#ff69b4', '#ffc0cb', '#ffb6c1', '#ffe4e1', '#fff0f5', '#f8e8ff'];
+            const numConfetti = 200;
 
             for (let i = 0; i < numConfetti; i++) {
                 confettiPieces.push({
                     x: Math.random() * confettiCanvas.width,
-                    y: Math.random() * confettiCanvas.height - confettiCanvas.height, // Mulai dari atas layar
-                    radius: Math.random() * 6 + 2,
+                    y: Math.random() * confettiCanvas.height - confettiCanvas.height,
+                    radius: Math.random() * 8 + 3,
                     color: colors[Math.floor(Math.random() * colors.length)],
-                    speed: Math.random() * 3 + 2,
-                    sway: (Math.random() - 0.5) * 4 // Untuk gerakan ke kiri dan kanan
+                    symbol: symbols[Math.floor(Math.random() * symbols.length)],
+                    speed: Math.random() * 4 + 2,
+                    sway: (Math.random() - 0.5) * 6,
+                    rotation: Math.random() * 360,
+                    rotationSpeed: (Math.random() - 0.5) * 10
                 });
             }
 
             function drawConfetti() {
-                confettiCtx.clearRect(0, 0, confettiCanvas.width, confettiCanvas.height); // Bersihkan canvas setiap frame
+                confettiCtx.clearRect(0, 0, confettiCanvas.width, confettiCanvas.height);
 
                 confettiPieces.forEach(p => {
-                    confettiCtx.beginPath();
-                    confettiCtx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
-                    confettiCtx.fillStyle = p.color;
-                    confettiCtx.fill();
+                    confettiCtx.save();
+                    confettiCtx.translate(p.x, p.y);
+                    confettiCtx.rotate(p.rotation * Math.PI / 180);
+                    
+                    if (Math.random() > 0.5) {
+                        // Draw emoji
+                        confettiCtx.font = p.radius + 'px Arial';
+                        confettiCtx.textAlign = 'center';
+                        confettiCtx.fillText(p.symbol, 0, 0);
+                    } else {
+                        // Draw circle
+                        confettiCtx.beginPath();
+                        confettiCtx.arc(0, 0, p.radius / 2, 0, Math.PI * 2);
+                        confettiCtx.fillStyle = p.color;
+                        confettiCtx.fill();
+                    }
+                    
+                    confettiCtx.restore();
 
                     p.y += p.speed;
-                    p.x += p.sway; // Tambahkan gerakan ke samping
+                    p.x += p.sway;
+                    p.rotation += p.rotationSpeed;
 
-                    // Reset confetti jika sudah melewati layar bawah
                     if (p.y > confettiCanvas.height + p.radius) {
-                        p.y = -p.radius; // Kembali ke atas
-                        p.x = Math.random() * confettiCanvas.width; // Posisi x acak
-                        p.sway = (Math.random() - 0.5) * 4; // Atur ulang sway
+                        p.y = -p.radius;
+                        p.x = Math.random() * confettiCanvas.width;
+                        p.sway = (Math.random() - 0.5) * 6;
+                        p.rotation = Math.random() * 360;
                     }
                 });
                 requestAnimationFrame(drawConfetti);
             }
-            drawConfetti(); // Mulai animasi
+            drawConfetti();
         }
 
-        // Sesuaikan ukuran canvas confetti saat jendela diubah ukurannya
         window.addEventListener('resize', () => {
             confettiCanvas.width = window.innerWidth;
             confettiCanvas.height = window.innerHeight;
