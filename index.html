@@ -20,8 +20,6 @@
             justify-content: center;
             min-height: calc(100vh - 40px);
             position: relative;
-            /* Custom cursor: a cute heart! */
-            cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="%23ff69b4"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C15.09 3.81 16.76 3 18.5 3 21.58 3 24 5.42 24 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>') 12 12, auto;
         }
         
         body::before {
@@ -85,6 +83,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
+            position: relative;
         }
         
         .gif-container img {
@@ -99,6 +98,257 @@
         .gif-container img:hover {
             transform: scale(1.05);
             box-shadow: 0 12px 35px rgba(255, 105, 180, 0.4);
+        }
+        
+        .swing-scene {
+            width: 100%;
+            height: 300px;
+            position: relative;
+            background: linear-gradient(180deg, #87CEEB 0%, #98FB98 100%);
+            border-radius: 25px;
+            overflow: hidden;
+            box-shadow: 0 8px 25px rgba(255, 105, 180, 0.3);
+            border: 3px solid rgba(255, 255, 255, 0.5);
+        }
+        
+        .tree {
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 120px;
+            height: 200px;
+        }
+        
+        .tree-trunk {
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 20px;
+            height: 80px;
+            background: linear-gradient(180deg, #8B4513 0%, #A0522D 100%);
+            border-radius: 10px;
+        }
+        
+        .tree-leaves {
+            position: absolute;
+            bottom: 60px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 120px;
+            height: 120px;
+            background: radial-gradient(circle, #90EE90 0%, #228B22 100%);
+            border-radius: 50%;
+            box-shadow: inset -10px -10px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        .swing-rope {
+            position: absolute;
+            top: 80px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 4px;
+            height: 120px;
+            background: #8B4513;
+            transform-origin: top center;
+            animation: swingRope 3s ease-in-out infinite;
+        }
+        
+        .swing-seat {
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 8px;
+            background: linear-gradient(90deg, #CD853F 0%, #DEB887 100%);
+            border-radius: 4px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+        
+        .girl-on-swing {
+            position: absolute;
+            bottom: 8px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 40px;
+            height: 50px;
+            animation: swingGirl 3s ease-in-out infinite;
+            transform-origin: center bottom;
+        }
+        
+        .girl-body {
+            position: relative;
+            width: 100%;
+            height: 100%;
+        }
+        
+        .girl-head {
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 20px;
+            height: 20px;
+            background: #FDBCB4;
+            border-radius: 50%;
+            border: 2px solid #F8BBD9;
+        }
+        
+        .girl-hair {
+            position: absolute;
+            top: -5px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 24px;
+            height: 16px;
+            background: #D2691E;
+            border-radius: 50% 50% 45% 45%;
+            animation: hairFlow 3s ease-in-out infinite;
+        }
+        
+        .girl-dress {
+            position: absolute;
+            top: 18px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 30px;
+            height: 25px;
+            background: linear-gradient(45deg, #FFB6C1 0%, #FF69B4 100%);
+            border-radius: 0 0 50% 50%;
+            animation: dressFlow 3s ease-in-out infinite;
+        }
+        
+        .girl-legs {
+            position: absolute;
+            bottom: 5px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 16px;
+            height: 15px;
+            background: #FDBCB4;
+            border-radius: 8px 8px 4px 4px;
+        }
+        
+        .clouds {
+            position: absolute;
+            top: 20px;
+            width: 100%;
+            height: 60px;
+        }
+        
+        .cloud {
+            position: absolute;
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 50px;
+            animation: floatClouds 8s ease-in-out infinite;
+        }
+        
+        .cloud1 {
+            top: 10px;
+            left: 10%;
+            width: 50px;
+            height: 20px;
+            animation-delay: 0s;
+        }
+        
+        .cloud2 {
+            top: 5px;
+            right: 15%;
+            width: 40px;
+            height: 15px;
+            animation-delay: 2s;
+        }
+        
+        .cloud3 {
+            top: 25px;
+            left: 70%;
+            width: 35px;
+            height: 12px;
+            animation-delay: 4s;
+        }
+        
+        .birds {
+            position: absolute;
+            top: 30px;
+            left: 20%;
+            width: 100px;
+            height: 30px;
+        }
+        
+        .bird {
+            position: absolute;
+            width: 15px;
+            height: 8px;
+            color: #333;
+            font-size: 12px;
+            animation: flyBirds 6s ease-in-out infinite;
+        }
+        
+        .bird1 { left: 0; animation-delay: 0s; }
+        .bird2 { left: 20px; animation-delay: 0.5s; }
+        .bird3 { left: 40px; animation-delay: 1s; }
+        
+        .flowers {
+            position: absolute;
+            bottom: 10px;
+            left: 10%;
+            right: 10%;
+            height: 30px;
+        }
+        
+        .flower {
+            position: absolute;
+            bottom: 0;
+            width: 20px;
+            height: 20px;
+            background: #FF69B4;
+            border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+            animation: flowerSway 4s ease-in-out infinite;
+        }
+        
+        .flower1 { left: 15%; animation-delay: 0s; }
+        .flower2 { right: 20%; animation-delay: 1s; background: #FFB6C1; }
+        .flower3 { left: 60%; animation-delay: 2s; background: #FF1493; }
+        
+        @keyframes swingRope {
+            0%, 100% { transform: translateX(-50%) rotate(-15deg); }
+            50% { transform: translateX(-50%) rotate(15deg); }
+        }
+        
+        @keyframes swingGirl {
+            0%, 100% { transform: translateX(-50%) rotate(-15deg); }
+            50% { transform: translateX(-50%) rotate(15deg); }
+        }
+        
+        @keyframes hairFlow {
+            0%, 100% { transform: translateX(-50%) skewX(5deg); }
+            50% { transform: translateX(-50%) skewX(-5deg); }
+        }
+        
+        @keyframes dressFlow {
+            0%, 100% { transform: translateX(-50%) skewX(-3deg); }
+            50% { transform: translateX(-50%) skewX(3deg); }
+        }
+        
+        @keyframes floatClouds {
+            0%, 100% { transform: translateX(0px) translateY(0px); }
+            25% { transform: translateX(5px) translateY(-2px); }
+            50% { transform: translateX(0px) translateY(-4px); }
+            75% { transform: translateX(-5px) translateY(-2px); }
+        }
+        
+        @keyframes flyBirds {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            25% { transform: translateY(-5px) rotate(-2deg); }
+            50% { transform: translateY(-8px) rotate(0deg); }
+            75% { transform: translateY(-3px) rotate(2deg); }
+        }
+        
+        @keyframes flowerSway {
+            0%, 100% { transform: rotate(-2deg); }
+            50% { transform: rotate(2deg); }
         }
         
         .btn {
@@ -152,8 +402,6 @@
             text-transform: uppercase;
             letter-spacing: 1px;
             font-weight: 700;
-            z-index: 10; /* Ensure yes button is above other elements */
-            position: relative; /* To allow z-index to work */
         }
         
         #yesBtn:hover {
@@ -165,14 +413,18 @@
         #noBtn {
             background: linear-gradient(45deg, #f0f0f0, #e0e0e0);
             color: #666;
-            transition: all 0.3s ease-out; /* Smooth transition for movement */
-            position: fixed; /* Allow dynamic positioning anywhere on screen */
-            z-index: 5; /* Keep it below the yes button */
+            transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            position: relative;
         }
         
         #noBtn:hover {
             background: linear-gradient(45deg, #e0e0e0, #d0d0d0);
             transform: translateY(-2px);
+        }
+        
+        #noBtn.moving {
+            position: absolute;
+            z-index: 100;
         }
         
         #finalScreen {
@@ -196,6 +448,148 @@
             font-size: clamp(1.8rem, 4vw, 2.5rem);
             margin-bottom: 25px;
             animation: bounce 2s ease-in-out infinite;
+        }
+        
+        .gift-options {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            margin: 25px 0;
+            flex-wrap: wrap;
+        }
+        
+        .gift-btn {
+            padding: 12px 25px;
+            background: linear-gradient(45deg, #ff69b4, #ff1493);
+            color: white;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(255, 20, 147, 0.3);
+        }
+        
+        .gift-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(255, 20, 147, 0.4);
+        }
+        
+        .ebook-container {
+            display: none;
+            perspective: 1000px;
+            margin: 30px 0;
+        }
+        
+        .book {
+            width: 400px;
+            height: 300px;
+            margin: 0 auto;
+            position: relative;
+            transform-style: preserve-3d;
+            cursor: pointer;
+        }
+        
+        .book-page {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(145deg, #fff9fc, #f0f8ff);
+            border: 3px solid #ffb6c1;
+            border-radius: 15px;
+            padding: 30px;
+            box-sizing: border-box;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            backface-visibility: hidden;
+            transition: transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            box-shadow: 0 10px 30px rgba(255, 105, 180, 0.2);
+        }
+        
+        .book-page.flipped {
+            transform: rotateY(-180deg);
+        }
+        
+        .book-page h3 {
+            font-family: 'Dancing Script', cursive;
+            font-size: 1.8rem;
+            color: #ff1493;
+            margin-bottom: 15px;
+            text-shadow: 1px 1px 3px rgba(255, 105, 180, 0.3);
+        }
+        
+        .book-page p {
+            font-family: 'Poppins', sans-serif;
+            font-size: 1rem;
+            color: #666;
+            line-height: 1.6;
+            margin: 10px 0;
+        }
+        
+        .book-page .emoji {
+            font-size: 2rem;
+            margin: 10px;
+        }
+        
+        .page-number {
+            position: absolute;
+            bottom: 15px;
+            right: 20px;
+            font-size: 0.9rem;
+            color: #ff69b4;
+            font-weight: 600;
+        }
+        
+        .book-controls {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 20px;
+        }
+        
+        .page-btn {
+            padding: 10px 20px;
+            background: linear-gradient(45deg, #ffc0cb, #ff69b4);
+            color: white;
+            border: none;
+            border-radius: 20px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        
+        .page-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(255, 105, 180, 0.4);
+        }
+        
+        .page-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none;
+        }
+        
+        @media (max-width: 768px) {
+            .book {
+                width: 320px;
+                height: 240px;
+            }
+            
+            .book-page {
+                padding: 20px;
+            }
+            
+            .book-page h3 {
+                font-size: 1.5rem;
+            }
+            
+            .book-page p {
+                font-size: 0.9rem;
+            }
         }
         
         @keyframes bounce {
@@ -225,7 +619,6 @@
             gap: 20px;
             flex-wrap: wrap;
             margin-top: 20px;
-            /* No longer needs position: relative if noBtn is fixed */
         }
         
         .confetti {
@@ -285,6 +678,93 @@
         <h2>You made me the happiest person! 💕✨</h2>
         <div class="romantic-message">Look how beautiful you are! 😍</div>
         <img id="capturedImage" src="" alt="Your lovely smile" />
+        
+        <div class="gift-options">
+            <button class="gift-btn" onclick="showEbook()">📖 Open Your Love Story</button>
+            <button class="gift-btn" onclick="showPlaylist()">🎵 Our Song Playlist</button>
+            <button class="gift-btn" onclick="showMemories()">💝 Memory Lane</button>
+        </div>
+        
+        <div class="ebook-container" id="ebookContainer">
+            <div class="book" id="loveBook">
+                <div class="book-page" id="page1">
+                    <div class="emoji">📖</div>
+                    <h3>Our Love Story</h3>
+                    <p>Once upon a time, in a world full of ordinary moments...</p>
+                    <p>Two hearts found each other and everything changed.</p>
+                    <div class="page-number">1/8</div>
+                </div>
+                
+                <div class="book-page" id="page2">
+                    <div class="emoji">💫</div>
+                    <h3>The First Spark</h3>
+                    <p>The moment I first saw you, time stood still.</p>
+                    <p>Your smile lit up the entire room, and I knew...</p>
+                    <p>I had found something magical.</p>
+                    <div class="page-number">2/8</div>
+                </div>
+                
+                <div class="book-page" id="page3">
+                    <div class="emoji">🌟</div>
+                    <h3>What Makes You Special</h3>
+                    <p>Your laugh is my favorite sound in the world.</p>
+                    <p>Your kindness touches everyone around you.</p>
+                    <p>Your dreams inspire me to be better every day.</p>
+                    <div class="page-number">3/8</div>
+                </div>
+                
+                <div class="book-page" id="page4">
+                    <div class="emoji">💕</div>
+                    <h3>My Promise to You</h3>
+                    <p>I promise to make you laugh when you're sad.</p>
+                    <p>To hold your hand through every adventure.</p>
+                    <p>To love you more each passing day.</p>
+                    <div class="page-number">4/8</div>
+                </div>
+                
+                <div class="book-page" id="page5">
+                    <div class="emoji">🌸</div>
+                    <h3>Our Future Together</h3>
+                    <p>I imagine lazy Sunday mornings with you.</p>
+                    <p>Dancing in the kitchen while cooking together.</p>
+                    <p>Creating memories that will last forever.</p>
+                    <div class="page-number">5/8</div>
+                </div>
+                
+                <div class="book-page" id="page6">
+                    <div class="emoji">🦋</div>
+                    <h3>You Give Me Butterflies</h3>
+                    <p>Even after saying yes, you still give me butterflies.</p>
+                    <p>Every text, every smile, every moment with you...</p>
+                    <p>Makes my heart skip a beat.</p>
+                    <div class="page-number">6/8</div>
+                </div>
+                
+                <div class="book-page" id="page7">
+                    <div class="emoji">💖</div>
+                    <h3>Thank You</h3>
+                    <p>Thank you for taking a chance on us.</p>
+                    <p>Thank you for saying yes to this adventure.</p>
+                    <p>Thank you for being you.</p>
+                    <div class="page-number">7/8</div>
+                </div>
+                
+                <div class="book-page" id="page8">
+                    <div class="emoji">♾️</div>
+                    <h3>Forever & Always</h3>
+                    <p>This is just the beginning of our story.</p>
+                    <p>With all my love, today and always...</p>
+                    <p><strong>Will you be my forever?</strong></p>
+                    <div class="page-number">8/8</div>
+                </div>
+            </div>
+            
+            <div class="book-controls">
+                <button class="page-btn" onclick="previousPage()" id="prevBtn" disabled>← Previous</button>
+                <button class="page-btn" onclick="nextPage()" id="nextBtn">Next →</button>
+            </div>
+        </div>
+        
         <div class="romantic-message">Forever and always... 💖</div>
     </div>
 
@@ -298,7 +778,6 @@
         const gifImage = document.querySelector('.gif-container img');
         const h1Title = document.querySelector('h1');
         const romanticMessage = document.querySelector('.romantic-message');
-        const buttonContainer = document.querySelector('.button-container'); // Still needed for initial layout reference
 
         const confettiCanvas = document.getElementById('confettiCanvas');
         const confettiCtx = confettiCanvas.getContext('2d');
@@ -306,6 +785,12 @@
         confettiCanvas.height = window.innerHeight;
 
         let yesSize = 1;
+        let clickCount = 0;
+        let isMoving = false;
+        const maxClicks = 8; // Setelah 8 kali klik, tombol NO jadi gede dan ga bisa lari
+        let currentPage = 1;
+        const totalPages = 8;
+        
         const noTexts = [
             "Are you sure? 🥺", 
             "Think about it? 💕", 
@@ -339,47 +824,88 @@
         // Create floating hearts periodically
         setInterval(createFloatingHeart, 2000);
 
-        noBtn.addEventListener('click', () => {
-            yesSize += 0.25;
+        // Function to move NO button to random position
+        function moveNoButton() {
+            if (isMoving || clickCount >= maxClicks) return;
+            
+            isMoving = true;
+            noBtn.classList.add('moving');
+            
+            // Get container dimensions
+            const container = document.querySelector('.button-container');
+            const containerRect = container.getBoundingClientRect();
+            const btnRect = noBtn.getBoundingClientRect();
+            
+            // Calculate safe boundaries (within viewport)
+            const maxX = window.innerWidth - btnRect.width - 20;
+            const maxY = window.innerHeight - btnRect.height - 20;
+            const minX = 20;
+            const minY = 100; // Leave space for title
+            
+            // Generate random position using math
+            const randomX = Math.max(minX, Math.min(maxX, Math.random() * maxX));
+            const randomY = Math.max(minY, Math.min(maxY, Math.random() * maxY));
+            
+            // Apply position with smooth animation
+            noBtn.style.left = randomX + 'px';
+            noBtn.style.top = randomY + 'px';
+            
+            // Add wiggle effect
+            noBtn.style.animation = 'none';
+            setTimeout(() => {
+                noBtn.style.animation = 'wiggle 0.5s ease-in-out';
+                setTimeout(() => {
+                    noBtn.style.animation = 'none';
+                    isMoving = false;
+                }, 500);
+            }, 100);
+        }
+
+        // Add CSS for wiggle animation
+        const wiggleStyle = document.createElement('style');
+        wiggleStyle.textContent = `
+            @keyframes wiggle {
+                0%, 100% { transform: rotate(0deg) scale(1); }
+                25% { transform: rotate(-5deg) scale(1.1); }
+                75% { transform: rotate(5deg) scale(1.1); }
+            }
+        `;
+        document.head.appendChild(wiggleStyle);
+
+        noBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            clickCount++;
+            
+            // Increase YES button size
+            yesSize += 0.3;
             yesBtn.style.transform = `scale(${yesSize})`;
 
-            const newText = noTexts[Math.floor(Math.random() * noTexts.length)];
+            const newText = noTexts[Math.min(clickCount - 1, noTexts.length - 1)];
             noBtn.innerText = newText;
 
-            // Get viewport dimensions
-            const viewportWidth = window.innerWidth;
-            const viewportHeight = window.innerHeight;
-
-            // Get button dimensions
-            const btnWidth = noBtn.offsetWidth;
-            const btnHeight = noBtn.offsetHeight;
-
-            // Calculate random positions within the viewport, ensuring button stays visible
-            // We want to avoid placing it too close to the YES button or off-screen.
-            // Let's define a safe zone for movement.
-            const padding = 50; // Minimum distance from edges
-            const minX = padding;
-            const maxX = viewportWidth - btnWidth - padding;
-            const minY = padding;
-            const maxY = viewportHeight - btnHeight - padding;
-
-            // Calculate new random positions
-            const newX = Math.random() * (maxX - minX) + minX;
-            const newY = Math.random() * (maxY - minY) + minY;
-
-            // Apply new random position
-            noBtn.style.left = `${newX}px`;
-            noBtn.style.top = `${newY}px`;
-
-            // Add a little heart explosion effect
+            // Add mini heart explosion
             createMiniHearts(noBtn);
 
-            if (yesSize > 3) {
-                noBtn.style.display = 'none';
-                yesBtn.innerText = "YES! Tap here now! 💕✨";
+            if (clickCount < maxClicks) {
+                // Move button to random position
+                setTimeout(() => moveNoButton(), 200);
+            } else {
+                // After max clicks, make NO button huge and stop moving
+                noBtn.style.position = 'relative';
+                noBtn.style.left = 'auto';
+                noBtn.style.top = 'auto';
+                noBtn.classList.remove('moving');
+                noBtn.style.transform = 'scale(2)';
+                noBtn.style.background = 'linear-gradient(45deg, #ff69b4, #ff1493)';
+                noBtn.style.color = 'white';
+                noBtn.innerHTML = "Fine... I give up! Click YES! 😤💕";
+                
+                // Make YES button even bigger
+                yesBtn.style.transform = `scale(${yesSize + 1})`;
+                yesBtn.innerText = "YES! I knew it! 💕✨";
                 
                 // Change the romantic message
-                romanticMessage.innerHTML = "I knew you'd come around... 💖";
+                romanticMessage.innerHTML = "Resistance is futile... 💖";
                 romanticMessage.style.animation = 'sparkle 1s ease-in-out infinite alternate';
             }
         });
@@ -426,42 +952,24 @@
         });
 
         function createMiniHearts(button) {
-            // Get button's position relative to the viewport
-            const rect = button.getBoundingClientRect();
-            const buttonCenterX = rect.left + rect.width / 2;
-            const buttonCenterY = rect.top + rect.height / 2;
-
             for (let i = 0; i < 5; i++) {
                 const miniHeart = document.createElement('div');
                 miniHeart.innerHTML = '💕';
-                miniHeart.style.position = 'fixed'; // Use fixed to float over everything
-                miniHeart.style.left = (buttonCenterX + (Math.random() - 0.5) * 40) + 'px';
-                miniHeart.style.top = (buttonCenterY + (Math.random() - 0.5) * 40) + 'px';
+                miniHeart.style.position = 'absolute';
+                miniHeart.style.left = button.offsetLeft + Math.random() * 50 + 'px';
+                miniHeart.style.top = button.offsetTop + Math.random() * 50 + 'px';
                 miniHeart.style.fontSize = '16px';
                 miniHeart.style.pointerEvents = 'none';
-                miniHeart.style.animation = 'floatUpFadeOut 1.5s ease-out forwards'; // New animation for mini hearts
-                miniHeart.style.zIndex = '10000'; // Ensure it's on top
+                miniHeart.style.animation = 'float 2s ease-out forwards';
                 document.body.appendChild(miniHeart);
 
-                setTimeout(() => miniHeart.remove(), 1500);
+                setTimeout(() => miniHeart.remove(), 2000);
             }
         }
 
-        // New animation for mini hearts
-        const styleSheet = document.createElement("style");
-        styleSheet.type = "text/css";
-        styleSheet.innerText = `
-            @keyframes floatUpFadeOut {
-                0% { transform: translateY(0) scale(1); opacity: 1; }
-                100% { transform: translateY(-50px) scale(0.5); opacity: 0; }
-            }
-        `;
-        document.head.appendChild(styleSheet);
-
-
         function launchRomanticConfetti() {
             const confettiPieces = [];
-            const symbols = ['💕', '💖', '💗', '💝', '�', '🌹', '✨', '💫', '🦋'];
+            const symbols = ['💕', '💖', '💗', '💝', '🌸', '🌹', '✨', '💫', '🦋'];
             const colors = ['#ff69b4', '#ffc0cb', '#ffb6c1', '#ffe4e1', '#fff0f5', '#f8e8ff'];
             const numConfetti = 200;
 
@@ -487,11 +995,10 @@
                     confettiCtx.translate(p.x, p.y);
                     confettiCtx.rotate(p.rotation * Math.PI / 180);
                     
-                    if (Math.random() > 0.4) { /* Increased chance for emoji */
+                    if (Math.random() > 0.5) {
                         // Draw emoji
-                        confettiCtx.font = p.radius * 2 + 'px Arial'; /* Make emoji slightly larger */
+                        confettiCtx.font = p.radius + 'px Arial';
                         confettiCtx.textAlign = 'center';
-                        confettiCtx.textBaseline = 'middle';
                         confettiCtx.fillText(p.symbol, 0, 0);
                     } else {
                         // Draw circle
@@ -523,6 +1030,91 @@
             confettiCanvas.width = window.innerWidth;
             confettiCanvas.height = window.innerHeight;
         });
+
+        // E-book functionality
+        function showEbook() {
+            document.getElementById('ebookContainer').style.display = 'block';
+            // Add entrance animation
+            setTimeout(() => {
+                document.getElementById('loveBook').style.animation = 'bookEntrance 1s ease-out forwards';
+            }, 100);
+        }
+
+        function showPlaylist() {
+            alert('🎵 Our Playlist:\n\n💕 "Perfect" - Ed Sheeran\n💖 "All of Me" - John Legend\n🌟 "Thinking Out Loud" - Ed Sheeran\n💫 "A Thousand Years" - Christina Perri\n🎶 "Can\'t Help Myself" - Four Tops\n💝 "Just the Way You Are" - Bruno Mars\n\nMore songs coming soon to our love story! 😍');
+        }
+
+        function showMemories() {
+            alert('💝 Our Memory Lane:\n\n📸 First time we talked\n💕 The moment you smiled at me\n🌟 Our first laugh together\n💖 When you said yes today!\n🦋 Every butterfly moment\n🌸 All the little things\n\nEvery memory with you is precious! 😊✨');
+        }
+
+        function nextPage() {
+            if (currentPage < totalPages) {
+                // Hide current page
+                document.getElementById(`page${currentPage}`).classList.add('flipped');
+                
+                currentPage++;
+                
+                // Show next page after animation
+                setTimeout(() => {
+                    document.getElementById(`page${currentPage}`).style.zIndex = 10;
+                    updatePageButtons();
+                }, 400);
+            }
+        }
+
+        function previousPage() {
+            if (currentPage > 1) {
+                // Hide current page
+                document.getElementById(`page${currentPage}`).style.zIndex = 1;
+                
+                currentPage--;
+                
+                // Show previous page
+                setTimeout(() => {
+                    document.getElementById(`page${currentPage}`).classList.remove('flipped');
+                    updatePageButtons();
+                }, 100);
+            }
+        }
+
+        function updatePageButtons() {
+            const prevBtn = document.getElementById('prevBtn');
+            const nextBtn = document.getElementById('nextBtn');
+            
+            prevBtn.disabled = (currentPage === 1);
+            nextBtn.disabled = (currentPage === totalPages);
+            
+            if (currentPage === totalPages) {
+                nextBtn.innerHTML = '💕 The End 💕';
+            } else {
+                nextBtn.innerHTML = 'Next →';
+            }
+        }
+
+        // Add book entrance animation
+        const bookStyle = document.createElement('style');
+        bookStyle.textContent = `
+            @keyframes bookEntrance {
+                0% {
+                    transform: scale(0.5) rotateY(-180deg);
+                    opacity: 0;
+                }
+                100% {
+                    transform: scale(1) rotateY(0deg);
+                    opacity: 1;
+                }
+            }
+            
+            .book-page {
+                z-index: 1;
+            }
+            
+            .book-page:first-child {
+                z-index: 10;
+            }
+        `;
+        document.head.appendChild(bookStyle);
 
     </script>
 </body>
