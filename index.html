@@ -20,6 +20,8 @@
             justify-content: center;
             min-height: calc(100vh - 40px);
             position: relative;
+            /* Custom cursor: a cute heart! */
+            cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="%23ff69b4"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C15.09 3.81 16.76 3 18.5 3 21.58 3 24 5.42 24 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>') 12 12, auto;
         }
         
         body::before {
@@ -150,6 +152,8 @@
             text-transform: uppercase;
             letter-spacing: 1px;
             font-weight: 700;
+            z-index: 10; /* Ensure yes button is above other elements */
+            position: relative; /* To allow z-index to work */
         }
         
         #yesBtn:hover {
@@ -161,7 +165,9 @@
         #noBtn {
             background: linear-gradient(45deg, #f0f0f0, #e0e0e0);
             color: #666;
-            transition: all 0.3s ease;
+            transition: all 0.3s ease-out; /* Smooth transition for movement */
+            position: fixed; /* Allow dynamic positioning anywhere on screen */
+            z-index: 5; /* Keep it below the yes button */
         }
         
         #noBtn:hover {
@@ -219,6 +225,7 @@
             gap: 20px;
             flex-wrap: wrap;
             margin-top: 20px;
+            /* No longer needs position: relative if noBtn is fixed */
         }
         
         .confetti {
@@ -291,6 +298,7 @@
         const gifImage = document.querySelector('.gif-container img');
         const h1Title = document.querySelector('h1');
         const romanticMessage = document.querySelector('.romantic-message');
+        const buttonContainer = document.querySelector('.button-container'); // Still needed for initial layout reference
 
         const confettiCanvas = document.getElementById('confettiCanvas');
         const confettiCtx = confettiCanvas.getContext('2d');
@@ -337,6 +345,31 @@
 
             const newText = noTexts[Math.floor(Math.random() * noTexts.length)];
             noBtn.innerText = newText;
+
+            // Get viewport dimensions
+            const viewportWidth = window.innerWidth;
+            const viewportHeight = window.innerHeight;
+
+            // Get button dimensions
+            const btnWidth = noBtn.offsetWidth;
+            const btnHeight = noBtn.offsetHeight;
+
+            // Calculate random positions within the viewport, ensuring button stays visible
+            // We want to avoid placing it too close to the YES button or off-screen.
+            // Let's define a safe zone for movement.
+            const padding = 50; // Minimum distance from edges
+            const minX = padding;
+            const maxX = viewportWidth - btnWidth - padding;
+            const minY = padding;
+            const maxY = viewportHeight - btnHeight - padding;
+
+            // Calculate new random positions
+            const newX = Math.random() * (maxX - minX) + minX;
+            const newY = Math.random() * (maxY - minY) + minY;
+
+            // Apply new random position
+            noBtn.style.left = `${newX}px`;
+            noBtn.style.top = `${newY}px`;
 
             // Add a little heart explosion effect
             createMiniHearts(noBtn);
@@ -393,24 +426,42 @@
         });
 
         function createMiniHearts(button) {
+            // Get button's position relative to the viewport
+            const rect = button.getBoundingClientRect();
+            const buttonCenterX = rect.left + rect.width / 2;
+            const buttonCenterY = rect.top + rect.height / 2;
+
             for (let i = 0; i < 5; i++) {
                 const miniHeart = document.createElement('div');
                 miniHeart.innerHTML = '💕';
-                miniHeart.style.position = 'absolute';
-                miniHeart.style.left = button.offsetLeft + Math.random() * 50 + 'px';
-                miniHeart.style.top = button.offsetTop + Math.random() * 50 + 'px';
+                miniHeart.style.position = 'fixed'; // Use fixed to float over everything
+                miniHeart.style.left = (buttonCenterX + (Math.random() - 0.5) * 40) + 'px';
+                miniHeart.style.top = (buttonCenterY + (Math.random() - 0.5) * 40) + 'px';
                 miniHeart.style.fontSize = '16px';
                 miniHeart.style.pointerEvents = 'none';
-                miniHeart.style.animation = 'float 2s ease-out forwards';
+                miniHeart.style.animation = 'floatUpFadeOut 1.5s ease-out forwards'; // New animation for mini hearts
+                miniHeart.style.zIndex = '10000'; // Ensure it's on top
                 document.body.appendChild(miniHeart);
 
-                setTimeout(() => miniHeart.remove(), 2000);
+                setTimeout(() => miniHeart.remove(), 1500);
             }
         }
 
+        // New animation for mini hearts
+        const styleSheet = document.createElement("style");
+        styleSheet.type = "text/css";
+        styleSheet.innerText = `
+            @keyframes floatUpFadeOut {
+                0% { transform: translateY(0) scale(1); opacity: 1; }
+                100% { transform: translateY(-50px) scale(0.5); opacity: 0; }
+            }
+        `;
+        document.head.appendChild(styleSheet);
+
+
         function launchRomanticConfetti() {
             const confettiPieces = [];
-            const symbols = ['💕', '💖', '💗', '💝', '🌸', '🌹', '✨', '💫', '🦋'];
+            const symbols = ['💕', '💖', '💗', '💝', '�', '🌹', '✨', '💫', '🦋'];
             const colors = ['#ff69b4', '#ffc0cb', '#ffb6c1', '#ffe4e1', '#fff0f5', '#f8e8ff'];
             const numConfetti = 200;
 
@@ -436,10 +487,11 @@
                     confettiCtx.translate(p.x, p.y);
                     confettiCtx.rotate(p.rotation * Math.PI / 180);
                     
-                    if (Math.random() > 0.5) {
+                    if (Math.random() > 0.4) { /* Increased chance for emoji */
                         // Draw emoji
-                        confettiCtx.font = p.radius + 'px Arial';
+                        confettiCtx.font = p.radius * 2 + 'px Arial'; /* Make emoji slightly larger */
                         confettiCtx.textAlign = 'center';
+                        confettiCtx.textBaseline = 'middle';
                         confettiCtx.fillText(p.symbol, 0, 0);
                     } else {
                         // Draw circle
